@@ -10,6 +10,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
@@ -26,6 +27,15 @@ jobs:
       run: |
         pwd
         ls -la
+
     - name: Run tests
       run: |
         pytest -v
+
+    -name:BUild docker image
+      run: |
+        docker build -t cicdimage:latest .
+
+    -name: run Docker container
+      run: |
+        docker run --rm cicdimage:latest
